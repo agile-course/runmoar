@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+<script src="{% static 'js/last_week.js' %}"></script>
+<div ng-controller="LastWeekController" ng-cloak class="container">
+    <style>
+        td {
+            border: 1px solid black;
+            padding: 15px;
+        }
+        .completed {
+            background-color: limegreen;
+            border-radius: 32px;
+            color: black;
+        }
+    </style>
+    <table>
+        <tr>
+            <td ng-repeat="date in dates">
+                <div ng-class="{'completed': dates_completed[$index]}">
+                    <span ng-bind="date|date"></span>
+                    <span ng-if="dates_completed[$index]">&#10003;</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+{% endblock %}

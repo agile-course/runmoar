@@ -1,4 +1,4 @@
-var app = angular.module('RunMOAR', [])
+var app = angular.module('RunMOAR', ['ngResource'])
 .config(function($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
