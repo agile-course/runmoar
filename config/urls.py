@@ -11,6 +11,7 @@ from django.views import defaults as default_views
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='pages/home.html'), name='home'),
     url(r'^lastweek/$', TemplateView.as_view(template_name='pages/lastweek.html'), name='lastweek'),
+    url(r'^calendar/$', TemplateView.as_view(template_name='pages/calendar.html'), name='calendar'),
 
     # Django Admin, use {% url 'admin:index' %}
     url(settings.ADMIN_URL, include(admin.site.urls)),

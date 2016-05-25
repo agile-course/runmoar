@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}
+    <script src="{% static 'js/calendar.js' %}"></script>
+    <div ng-controller="CalendarController" class="container">
+        <style>
+        .completed button span {
+            background-color: limegreen;
+            border-radius: 32px;
+            color: black;
+        }
+        </style>
+        <uib-datepicker ng-model="dt" class="well well-sm" datepicker-options="options"></uib-datepicker>
+    </div>
+{% endblock %}

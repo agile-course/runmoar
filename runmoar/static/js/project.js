@@ -1,4 +1,4 @@
-var app = angular.module('RunMOAR', ['ngResource'])
+var app = angular.module('RunMOAR', ['ngResource', 'ngAnimate', 'ui.bootstrap'])
 .config(function($interpolateProvider, $httpProvider) {
     $interpolateProvider.startSymbol('{[{');
     $interpolateProvider.endSymbol('}]}');
