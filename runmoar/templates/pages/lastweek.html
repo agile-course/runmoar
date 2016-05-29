@@ -18,7 +18,7 @@
     </style>
     <table>
         <tr>
-            <td ng-repeat="date in dates">
+            <td ng-repeat="date in dates" ng-click="toggleCompleted(date)">
                 <div ng-class="{'completed': dates_completed[$index]}">
                     <span ng-bind="date|date"></span>
                     <span ng-if="dates_completed[$index]">&#10003;</span>

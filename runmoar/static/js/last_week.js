@@ -30,4 +30,10 @@ app.controller('LastWeekController', function($scope, $resource, $filter) {
         });
     };
     getWeek();
+
+    $scope.toggleCompleted = function(date) {
+        DateStatus.toggle({'date': $filter('date')(date, dateFormat)}, function(result) {
+            getWeek();
+        });
+    };
 });
