@@ -23,10 +23,11 @@ app.controller('LastWeekController', function($scope, $resource, $filter) {
     var getWeek = function() {
         $scope.dates_completed = [false, false, false, false, false, false, false];
 
-        angular.forEach($scope.dates, function(date, index) {
-            DateStatus.get({'date': $filter('date')(date, dateFormat)}, function(result) {
-                $scope.dates_completed[index] = result.date_completed;
-            });
+        DateStatus.get({
+            'start_date': $filter('date')($scope.dates[0], dateFormat),
+            'end_date': $filter('date')($scope.dates[$scope.dates.length-1], dateFormat)
+        }, function(result) {
+            $scope.dates_completed = result.dates_completed
         });
     };
     getWeek();

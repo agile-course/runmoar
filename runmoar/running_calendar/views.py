@@ -1,3 +1,4 @@
+from datetime import timedelta
 import json
 
 from django.http import JsonResponse
@@ -12,16 +13,24 @@ class GetDateAPIView(View):
     def get(self, request, *args, **kwargs):
         input_data = request.GET
         try:
-            input_date = toDate(input_data['date'])
+            start_date = toDate(input_data['start_date'])
+            end_date = toDate(input_data['end_date'])
         except KeyError:
             return JsonResponse(status=400, data={})
 
-        try:
-            date_completed = DateStatus.objects.get(date=input_date).completed
-        except DateStatus.DoesNotExist:
-            date_completed = False
+        dates_to_check = []
+        while start_date < end_date:
+            dates_to_check.append(start_date)
+            start_date += timedelta(days=1)
 
-        return JsonResponse(status=200, data={'date_completed': date_completed}, safe=False)
+        dates_completed = []
+        for date in dates_to_check:
+            try:
+                dates_completed.append(DateStatus.objects.get(date=date).completed)
+            except DateStatus.DoesNotExist:
+                dates_completed.append(False)
+
+        return JsonResponse(status=200, data={'dates_completed': dates_completed}, safe=False)
 
 
 class ToggleStatusAPIView(View):
