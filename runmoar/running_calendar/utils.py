@@ -7,7 +7,7 @@ def toDate(input_date):
 
 def getDateRange(start_date, end_date):
     dates_to_check = []
-    while start_date < end_date:
+    while start_date <= end_date:
         dates_to_check.append(start_date)
         start_date += timedelta(days=1)
 
