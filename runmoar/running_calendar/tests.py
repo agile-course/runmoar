@@ -3,6 +3,7 @@ import json
 from test_plus.test import TestCase
 
 from .models import DateStatus
+from .utils import getDateRange, toDate
 
 
 class CompletionStatusViewTestCase(TestCase):
@@ -56,3 +57,11 @@ class ToggleStatusAPIViewTests(ToggleStatusViewTestCase):
         date = '2016-05-01'
         self._execute_passing_test(date)
         self.assertTrue(DateStatus.objects.get(date=date).completed)
+
+
+class UtilTests(TestCase):
+
+    def test_getDateRange(self):
+        expected = [toDate('2016-05-01'), toDate('2016-05-02'), toDate('2016-05-03')]
+        actual = getDateRange(toDate('2016-05-01'), toDate('2016-05-03'))
+        self.assertEquals(expected, actual)

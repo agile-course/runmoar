@@ -1,11 +1,10 @@
-from datetime import timedelta
 import json
 
 from django.http import JsonResponse
 from django.views.generic import View
 
 from .models import DateStatus
-from .utils import toDate
+from .utils import getDateRange, toDate
 
 
 class GetDateAPIView(View):
@@ -18,11 +17,7 @@ class GetDateAPIView(View):
         except KeyError:
             return JsonResponse(status=400, data={})
 
-        dates_to_check = []
-        while start_date < end_date:
-            dates_to_check.append(start_date)
-            start_date += timedelta(days=1)
-
+        dates_to_check = getDateRange(start_date, end_date)
         dates_completed = []
         for date in dates_to_check:
             try:
